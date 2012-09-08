@@ -5,19 +5,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
+import android.database.Cursor;
 
 import com.jeffgabriel.TaskManager.Interfaces.ITaskProvider;
 
 public class TaskProvider implements ITaskProvider {
 
+	public static final String ID = "_id";
+	public static final String NAME = "Name";
+	public static final String DUE_DATE = "DueDate";
+	public static final String CATEGORY_ID = "CategoryId";
+	public static final String CREATE_DATE = "CreateDate";
+	public static final String IS_COMPLETE = "IsComplete";
+	
 	com.jeffgabriel.TaskManager.Interfaces.IDbHelper _dbHelper;
 	private final Context _context;
-
+	private TaskQuery _standardQuery;
 	public TaskProvider(
 			com.jeffgabriel.TaskManager.Interfaces.IDbHelper helper,
 			Context context) {
 		_context = context;
 		_dbHelper = helper;
+		_standardQuery = new TaskQuery(PreferenceService.getShowCompletedPreference(_context));
 		try {
 			_dbHelper.createDataBase();
 		} catch (IOException e) {
@@ -37,15 +46,7 @@ public class TaskProvider implements ITaskProvider {
 	String categoryWhere = " CategoryId = ? ";
 
 	public List<Task> getSome(int pageSize, int pageIndex) {
-		boolean showComplete = PreferenceService
-				.getShowCompletedPreference(_context);
-		String[] whereParams = null;
-		String statusWhere = null;
-		if (showComplete == false) {
-			whereParams = new String[] { "0" };
-			statusWhere = " IsComplete = ? ";
-		}
-		List<Task> fullResults = _dbHelper.getTasks(statusWhere, whereParams);
+		List<Task> fullResults = _dbHelper.getTasks(_standardQuery);
 		if (pageSize > 0 && fullResults.isEmpty() == false) {
 			int resultEndIndex = pageSize * (pageIndex + 1);
 			resultEndIndex = resultEndIndex > fullResults.size() ? fullResults
@@ -56,6 +57,11 @@ public class TaskProvider implements ITaskProvider {
 		}
 		return fullResults;
 	}
+	
+	public Cursor getTaskCursor(){
+		return _dbHelper.getTaskCursor(_standardQuery);
+	}
+	
 
 	public void update(Task task) {
 		if (task.get_dueDate() == null)
@@ -67,8 +73,10 @@ public class TaskProvider implements ITaskProvider {
 	String whereClause = "_id = ?";
 
 	public Task get(int taskId) {
-		ArrayList<Task> tasks = _dbHelper.getTasks(whereClause,
-				new String[] { Integer.toString(taskId) });
+		TaskQuery byId = new TaskQuery(false);
+		byId.set_WhereParameters(new String[] { Integer.toString(taskId) });
+		byId.set_whereStatement(whereClause);
+		ArrayList<Task> tasks = _dbHelper.getTasks(byId);
 		if (tasks.isEmpty() == false)
 			return tasks.get(0);
 		return null;

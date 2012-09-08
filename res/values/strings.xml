@@ -27,4 +27,7 @@
     <string name="alertSoundOnOffPrefTitle">Play Task Due Alert</string>
     <string name="alertSoundPrefSummary">Select the sound to play when a task is due</string>
     <string name="alertSoundPrefTitle">Select Alert Sound</string>
+    <string name="taskAddFormPreferenceCategory">New Task Settings</string>
+    <string name="defaultTaskTimeLabel">Select default new task time</string>
+    <string name="defaultTimeTitle">defaultTime picker container</string>
 </resources>

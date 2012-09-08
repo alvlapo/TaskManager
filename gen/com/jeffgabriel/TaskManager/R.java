@@ -21,15 +21,18 @@ public final class R {
         public static final int x_button=0x7f020004;
     }
     public static final class id {
-        public static final int actionGroup=0x7f070015;
-        public static final int addNewTask=0x7f070016;
+        public static final int actionGroup=0x7f070017;
+        public static final int addNewTask=0x7f070018;
+        public static final int boundTaskList=0x7f07000e;
         public static final int btnDeleteTask=0x7f070012;
-        public static final int closeButton=0x7f070005;
-        public static final int currentTaskHeader=0x7f070004;
-        public static final int currentTasks=0x7f070006;
-        public static final int globalSettings=0x7f070013;
+        public static final int currentTaskHeader=0x7f070006;
+        public static final int defaultTaskTimeOption=0x7f070003;
+        public static final int defaultTaskTimePicker=0x7f070014;
+        public static final int defaultTimeLabel=0x7f070013;
+        public static final int globalSettings=0x7f070015;
         public static final int layout_root=0x7f070000;
-        public static final int linearLayout=0x7f070003;
+        public static final int linearLayout=0x7f070005;
+        public static final int listItemName=0x7f070004;
         public static final int newTaskDate=0x7f070009;
         public static final int newTaskForm=0x7f070002;
         public static final int newTaskLabel=0x7f070007;
@@ -37,22 +40,25 @@ public final class R {
         public static final int relativeLayout1=0x7f07000a;
         public static final int saveContinueTaskButton=0x7f07000d;
         public static final int saveTaskButton=0x7f07000c;
-        public static final int settings=0x7f070014;
+        public static final int settings=0x7f070016;
         public static final int skip=0x7f070001;
-        public static final int tableRow1=0x7f07000f;
         public static final int taskDueDate=0x7f070011;
         public static final int taskIsComplete=0x7f070010;
-        public static final int taskTable=0x7f07000e;
+        public static final int taskTable=0x7f07000f;
         public static final int timePicker=0x7f07000b;
     }
     public static final class layout {
         public static final int checkbox=0x7f030000;
         public static final int create=0x7f030001;
-        public static final int main=0x7f030002;
-        public static final int new_task=0x7f030003;
-        public static final int preferences=0x7f030004;
-        public static final int task_table=0x7f030005;
-        public static final int task_view=0x7f030006;
+        public static final int custom_option=0x7f030002;
+        public static final int list_item=0x7f030003;
+        public static final int main=0x7f030004;
+        public static final int new_task=0x7f030005;
+        public static final int preferences=0x7f030006;
+        public static final int task_list=0x7f030007;
+        public static final int task_table=0x7f030008;
+        public static final int task_view=0x7f030009;
+        public static final int time_option=0x7f03000a;
     }
     public static final class menu {
         public static final int options=0x7f060000;
@@ -70,6 +76,8 @@ public final class R {
         public static final int app_name=0x7f050000;
         public static final int closeButtonDesc=0x7f05000f;
         public static final int currentTaskHeaderLabel=0x7f050001;
+        public static final int defaultTaskTimeLabel=0x7f05001b;
+        public static final int defaultTimeTitle=0x7f05001c;
         public static final int deleteButtonText=0x7f050005;
         public static final int deleteWarning=0x7f050006;
         public static final int deleteWarningNoShow=0x7f050008;
@@ -80,6 +88,7 @@ public final class R {
         public static final int invalidUriParameterMsg=0x7f050010;
         public static final int noDueDateError=0x7f050004;
         public static final int settingsMenuItem=0x7f05000b;
+        public static final int taskAddFormPreferenceCategory=0x7f05001a;
         public static final int taskDisplayPrefereceCategory=0x7f05000d;
         public static final int taskListSizePrefSummary=0x7f050015;
         public static final int taskListSizePrefTitle=0x7f050014;

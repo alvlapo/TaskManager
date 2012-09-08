@@ -122,9 +122,9 @@ public class DatabaseHelper extends SQLiteOpenHelper implements
 	public void openDataBase() throws SQLException {
 		// Open the database
 		String myPath = DB_PATH + DatabaseName;
+		if(_dataBase == null || _dataBase.isOpen() == false)
 		_dataBase = SQLiteDatabase.openDatabase(myPath, null,
-				SQLiteDatabase.OPEN_READWRITE);
-
+					SQLiteDatabase.OPEN_READWRITE);
 	}
 
 	@Override
@@ -144,16 +144,13 @@ public class DatabaseHelper extends SQLiteOpenHelper implements
 	static final int CategoryColumn = 3;
 	static final int CreateDateColumn = 4;
 	static final int CompleteColumn = 5;
-
-	public ArrayList<Task> getTasks(String query, String[] args) {
-
-		String[] columns = null;
-		String orderBy = "DueDate DESC";
+	
+	String orderBy = "DueDate DESC";
+	public ArrayList<Task> getTasks(TaskQuery query) {
 		ArrayList<Task> tasks = new ArrayList<Task>();
 		this.openDataBase();
 		try {
-			Cursor results = _dataBase.query(table, columns, query, args, null,
-					null, orderBy);
+			Cursor results = getTaskCursor(query);
 			if (results.moveToFirst()) {
 				while (results.isAfterLast() == false) {
 					Task task = new Task(results.getInt(idColumn),
@@ -169,6 +166,15 @@ public class DatabaseHelper extends SQLiteOpenHelper implements
 			this.close();
 		}
 		return tasks;
+	}
+	
+	public Cursor getTaskCursor(TaskQuery query){
+		String[] columns = null;
+		
+			this.openDataBase();
+		Cursor results = _dataBase.query(table, columns, query.get_whereStatement(), query.get_WhereParameters(), null,
+				null, orderBy);
+		return results;
 	}
 
 	String whereClause = "_id = ?";

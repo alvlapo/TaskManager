@@ -35,4 +35,10 @@
                         android:entries="@array/listSizes"
                         android:entryValues="@array/listSizes" />
     </PreferenceCategory>
+    <PreferenceCategory android:title="@string/taskAddFormPreferenceCategory">
+        <Preference 
+            	android:title="@string/defaultTimeTitle"
+            	android:key="defaultNewTimePref"
+			/>
+    </PreferenceCategory>
 </PreferenceScreen>
