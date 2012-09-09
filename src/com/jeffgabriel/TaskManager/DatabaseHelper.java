@@ -4,6 +4,9 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Date;
 
+import com.jeffgabriel.TaskManager.Interfaces.IValidate;
+import com.jeffgabriel.TaskManager.Validators.TaskValidator;
+
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
@@ -122,8 +125,8 @@ public class DatabaseHelper extends SQLiteOpenHelper implements
 	public void openDataBase() throws SQLException {
 		// Open the database
 		String myPath = DB_PATH + DatabaseName;
-		if(_dataBase == null || _dataBase.isOpen() == false)
-		_dataBase = SQLiteDatabase.openDatabase(myPath, null,
+		if (_dataBase == null || _dataBase.isOpen() == false)
+			_dataBase = SQLiteDatabase.openDatabase(myPath, null,
 					SQLiteDatabase.OPEN_READWRITE);
 	}
 
@@ -144,8 +147,9 @@ public class DatabaseHelper extends SQLiteOpenHelper implements
 	static final int CategoryColumn = 3;
 	static final int CreateDateColumn = 4;
 	static final int CompleteColumn = 5;
-	
+
 	String orderBy = "DueDate DESC";
+
 	public ArrayList<Task> getTasks(TaskQuery query) {
 		ArrayList<Task> tasks = new ArrayList<Task>();
 		this.openDataBase();
@@ -167,12 +171,13 @@ public class DatabaseHelper extends SQLiteOpenHelper implements
 		}
 		return tasks;
 	}
-	
-	public Cursor getTaskCursor(TaskQuery query){
+
+	public Cursor getTaskCursor(TaskQuery query) {
 		String[] columns = null;
-		
-			this.openDataBase();
-		Cursor results = _dataBase.query(table, columns, query.get_whereStatement(), query.get_WhereParameters(), null,
+
+		this.openDataBase();
+		Cursor results = _dataBase.query(table, columns,
+				query.get_whereStatement(), query.get_WhereParameters(), null,
 				null, orderBy);
 		return results;
 	}
@@ -189,7 +194,8 @@ public class DatabaseHelper extends SQLiteOpenHelper implements
 		}
 	}
 
-	public Task add(Task task) throws SQLException {
+	public Task add(Task task) throws SQLException, IllegalArgumentException {
+		validate(task);
 		if (task.get_id() > 0)
 			return this.update(task);
 		this.openDataBase();
@@ -216,6 +222,13 @@ public class DatabaseHelper extends SQLiteOpenHelper implements
 
 	private Date FromEpoch(Long dateEpoch) {
 		return new Date(dateEpoch);
+	}
+
+	private void validate(Task task) {
+		IValidate<Task> taskValidator = new TaskValidator(_context);
+		String message = taskValidator.Validate(task);
+		if (taskValidator.IsValid() == false)
+			throw new IllegalArgumentException(message);
 	}
 
 	// @Override

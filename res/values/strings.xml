@@ -30,4 +30,6 @@
     <string name="taskAddFormPreferenceCategory">New Task Settings</string>
     <string name="defaultTaskTimeLabel">Select default new task time</string>
     <string name="defaultTimeTitle">defaultTime picker container</string>
+    <string name="taskNameValidationMessage">A task must have a description.</string>
+    <string name="taskDateInPastValidationMessage">A task cannot be due in the past.</string>
 </resources>

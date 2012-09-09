@@ -53,7 +53,7 @@ public class TaskCursorAdapter extends ResourceCursorAdapter {
 			public void onCheckedChanged(CompoundButton buttonView,
 					boolean isChecked) {
 				state.Task.set_isComplete(isChecked);
-				getProvider(state.Context).update(state.Task);
+				updateTask(state.Context, state.Task);
 				if (state.Task.get_isComplete())
 					taskCheck.setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG);
 				else
@@ -124,6 +124,11 @@ public class TaskCursorAdapter extends ResourceCursorAdapter {
 
 	private void deleteTask(Context context, Task task) {
 		getProvider(context).delete(task);
+		this.notifyDataSetChanged();
+	}
+	
+	private void updateTask(Context context, Task task){
+		getProvider(context).update(task);
 		this.notifyDataSetChanged();
 	}
 
