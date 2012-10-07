@@ -8,27 +8,44 @@ import java.util.Date;
 import android.content.ContentValues;
 import android.net.Uri;
 
-public class Task implements Serializable{
-	
-/**
+public class Task implements Serializable {
+
+	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 7527562295622776147L;
-	//CTORS
-	public Task(){
-		this(-1,"",Calendar.getInstance().getTime(),false);
+
+	// CTORS
+	public Task() {
+		this(-1, "", Calendar.getInstance().getTime(), false);
 	}
-	
+
 	public Task(int id, String name, Date dueDate, boolean isComplete) {
 		_id = id;
 		_name = name;
 		_dueDate = dueDate;
 		_isComplete = isComplete;
 	}
-//END CTORS
-	
-//PROPERTIES
+
+	public Task(ContentValues values) {
+		if (values.containsKey(TaskProvider.ID))
+			_id = values.getAsInteger(TaskProvider.ID);
+		if (values.containsKey(TaskProvider.IS_COMPLETE))
+			_isComplete = values.getAsBoolean(TaskProvider.IS_COMPLETE);
+		if (values.containsKey(TaskProvider.NAME))
+			_name = values.getAsString(TaskProvider.NAME);
+		if (values.containsKey(TaskProvider.DUE_DATE)) {
+			Calendar calendar = Calendar.getInstance();
+			calendar.setTimeInMillis(values.getAsLong(TaskProvider.DUE_DATE));
+			_dueDate = calendar.getTime();
+		}
+	}
+
+	// END CTORS
+
+	// PROPERTIES
 	private int _id = -1;
+
 	public int get_id() {
 		return _id;
 	}
@@ -39,6 +56,7 @@ public class Task implements Serializable{
 
 	private String _name;
 	private Date _dueDate;
+
 	public String get_name() {
 		return _name;
 	}
@@ -61,13 +79,14 @@ public class Task implements Serializable{
 
 	public void set_isComplete(boolean isComplete) {
 		this._isComplete = isComplete;
-		if(isComplete == true)
+		if (isComplete == true)
 			this.set_completeDate(Calendar.getInstance().getTime());
 	}
 
 	private boolean _isComplete = false;
-	
+
 	private Date _completeDate;
+
 	public Date get_completeDate() {
 		return _completeDate;
 	}
@@ -75,47 +94,47 @@ public class Task implements Serializable{
 	public void set_completeDate(Date completeDate) {
 		this._completeDate = completeDate;
 	}
-	
-	private static final String HOST = "com.jeffgabriel.taskmanager";
+
+	private static final String HOST = TaskProvider.AUTHORITY;
 	private static final String SCHEME = "content";
 	private static final String PATH = "task";
 	private static final String URI_FORMAT = "%s://%s/%s/%d";
-	
-	public Uri get_Uri()
-	{
-		Uri taskUri = Uri.parse(String.format(URI_FORMAT, SCHEME,HOST,PATH,this.get_id()));
+
+	public Uri get_Uri() {
+		Uri taskUri = Uri.parse(String.format(URI_FORMAT, SCHEME, HOST, PATH,
+				this.get_id()));
 		return taskUri;
 	}
-	
-	static int getIdFromUri(Uri intentUri){
+
+	static int getIdFromUri(Uri intentUri) {
 		validateUri(intentUri);
 		String idString = intentUri.getLastPathSegment();
 		return Integer.parseInt(idString);
 	}
-	
-	static void validateUri(Uri uri){
-		if(uri != null 
-				&& uri.getScheme().equalsIgnoreCase(SCHEME)
+
+	static void validateUri(Uri uri) {
+		if (uri != null && uri.getScheme().equalsIgnoreCase(SCHEME)
 				&& uri.getHost().equalsIgnoreCase(HOST)
 				&& uri.getPathSegments().get(0).equalsIgnoreCase(PATH))
 			return;
-		throw new InvalidParameterException("The Uri provided is not a Task Uri.");
+		throw new InvalidParameterException(
+				"The Uri provided is not a Task Uri.");
 	}
 
-//END PROPERTIES	
+	// END PROPERTIES
 
-	public ContentValues getValuesMap(){
+	public ContentValues getValuesMap() {
 		ContentValues values = new ContentValues();
-		values.put("Name",this._name);
-		if(this._dueDate != null)
+		values.put("Name", this._name);
+		if (this._dueDate != null)
 			values.put("DueDate", this._dueDate.getTime());
-		//TODO: match with proper categories
-		values.put("CategoryId",1);
+		// TODO: match with proper categories
+		values.put("CategoryId", 1);
 		values.put("CreateDate", Calendar.getInstance().getTimeInMillis());
-		values.put("IsComplete", this._isComplete ? 1 : 0 );
-		if(this._completeDate != null)
+		values.put("IsComplete", this._isComplete ? 1 : 0);
+		if (this._completeDate != null)
 			values.put("CompleteDate", this._completeDate.getTime());
 		return values;
 	}
-	
+
 }

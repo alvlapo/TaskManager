@@ -4,9 +4,15 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <com.jeffgabriel.TaskManager.DefaultTimeWidget
-        android:id="@+id/defaultTaskTimeOption"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/defaultTimeLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/defaultTaskTimeLabel" />
+    <TimePicker
+        android:id="@+id/defaultTaskTimePicker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" 
+      />
 
 </LinearLayout>

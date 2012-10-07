@@ -1,44 +1,50 @@
 package com.jeffgabriel.TaskManager;
 
-import android.app.Activity;
 import android.content.Context;
+import android.preference.Preference;
 import android.text.format.Time;
 import android.util.AttributeSet;
 import android.widget.TimePicker;
-import android.widget.TimePicker.OnTimeChangedListener;
 
-public class DefaultTimeWidget extends android.widget.LinearLayout {
-
-	static Context _context;
+public class DefaultTimeWidget extends Preference {
 
 	public DefaultTimeWidget(Context context) {
 		super(context);
-		_context = context;
 	}
 
-	public DefaultTimeWidget(Context context, AttributeSet attrs) {
-		super(context, attrs);
-		_context = context;
+	public DefaultTimeWidget(Context context, AttributeSet attributeSet) {
+		super(context, attributeSet);
 	}
 
-	@Override
-	protected void onFinishInflate() {
-		super.onFinishInflate();
-		((Activity) getContext()).getLayoutInflater().inflate(
-				R.layout.time_option, this);
-		TimePicker defaultTime = (TimePicker) findViewById(R.id.defaultTaskTimePicker);
-		Time time = PreferenceService.getDefaultTaskTime(_context);
-		defaultTime.setCurrentHour(time.hour);
-		defaultTime.setCurrentMinute(time.minute);
-		defaultTime.setOnTimeChangedListener(defaltTimeListener);
-	}
+	// public DefaultTimeWidget(Context context, int theme,
+	// OnTimeSetListener callBack, int hourOfDay, int minute,
+	// boolean is24HourView) {
+	// super(context, theme, callBack, hourOfDay, minute, false);
+	// Time time = PreferenceService.getDefaultTaskTime(context);
+	// this.updateTime(time.hour, time.minute);
+	// }
 
-	private TimePicker.OnTimeChangedListener defaltTimeListener = new OnTimeChangedListener() {
+	// @Override
+	// protected View onCreateView(ViewGroup parent) {
+	// // TODO Auto-generated method stub
+	// return super.onCreateView(parent);
+	// this.setLayoutResource(R.layout.custom_option);
+	// TimePicker defaultTime = (TimePicker) (R.id.defaultTaskTimePicker);
+	// Time time = PreferenceService.getDefaultTaskTime(getContext());
+	// defaultTime.setCurrentHour(time.hour);
+	// defaultTime.setCurrentMinute(time.minute);
+	// defaultTime.setOnTimeChangedListener(defaultTimeListener);
+	// }
 
-		public void onTimeChanged(TimePicker view, int hour, int minute) {
+	TimePicker.OnTimeChangedListener defaultTimeListener = new TimePicker.OnTimeChangedListener() {
+
+		@Override
+		public void onTimeChanged(android.widget.TimePicker view, int hour,
+				int minute) {
 			Time time = new Time();
 			time.set(0, minute, hour, 1, 1, 1);
-			PreferenceService.setDefaultTaskTime(_context, time.toMillis(false));
+			PreferenceService.setDefaultTaskTime(getContext(),
+					time.toMillis(false));
 		}
 	};
 }

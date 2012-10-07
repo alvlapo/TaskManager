@@ -231,14 +231,4 @@ public class DatabaseHelper extends SQLiteOpenHelper implements
 			throw new IllegalArgumentException(message);
 	}
 
-	// @Override
-	// public synchronized SQLiteDatabase getWritableDatabase(){
-	// return null;
-	// }
-	//
-	// @Override
-	// public synchronized SQLiteDatabase getReadableDatabase(){
-	// return null;
-	// }
-
 }
