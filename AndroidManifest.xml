@@ -34,6 +34,7 @@
             <intent-filter>
                 <category android:name="android.intent.category.EDIT" />
                 <action android:name="android.intent.action.INSERT" />
+                <action android:name="android.intent.action.EDIT" />
                 <data android:mimeType="vnd.android.cursor.item/Task" />
             </intent-filter>
         </activity>

@@ -31,47 +31,52 @@ public class NewTaskWidget extends LinearLayout {
 	@Override
 	protected void onFinishInflate() {
 		super.onFinishInflate();
+
 		((Activity) getContext()).getLayoutInflater().inflate(
 				R.layout.new_task, this);
 		newTaskName = (EditText) findViewById(R.id.newtaskName);
 		newTaskDate = (DatePicker) findViewById(R.id.newTaskDate);
-		newTime = (TimePicker)findViewById(R.id.timePicker);
+		newTime = (TimePicker) findViewById(R.id.timePicker);
+
 		clearForm();
 	}
 
 	void clearForm() {
+		android.text.format.Time defaultTime = PreferenceService
+				.getDefaultTaskTime(this.getContext());
 		newTaskName.setText("");
 		Calendar cal = Calendar.getInstance(
 				TimeZone.getTimeZone("America/New_York"), Locale.US);
 		cal.add(Calendar.DAY_OF_MONTH, 1);
 		newTaskDate.updateDate(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH),
 				cal.get(Calendar.DAY_OF_MONTH));
-		newTime.setCurrentHour(8);
-		newTime.setCurrentMinute(0);
+		newTime.setCurrentHour(defaultTime.hour);
+		newTime.setCurrentMinute(defaultTime.minute);
 	}
-	
-	Time getTime(){
-		Time pickedTime = new Time(newTime.getCurrentHour(),newTime.getCurrentMinute(),0);
+
+	Time getTime() {
+		Time pickedTime = new Time(newTime.getCurrentHour(),
+				newTime.getCurrentMinute(), 0);
 		return pickedTime;
 	}
-	
-	Date getDate(){
+
+	Date getDate() {
 		Calendar cal = Calendar.getInstance();
 		cal.set(Calendar.DAY_OF_MONTH, newTaskDate.getDayOfMonth());
 		cal.set(Calendar.MONTH, newTaskDate.getMonth());
-		cal.set(Calendar.YEAR,  newTaskDate.getYear());
+		cal.set(Calendar.YEAR, newTaskDate.getYear());
 		return cal.getTime();
 	}
-	
-	Date getDateAndTime(){
+
+	Date getDateAndTime() {
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(getDate());
 		cal.set(Calendar.HOUR_OF_DAY, newTime.getCurrentHour());
 		cal.set(Calendar.MINUTE, newTime.getCurrentMinute());
 		return cal.getTime();
 	}
-	
-	String getTaskName(){
+
+	String getTaskName() {
 		return newTaskName.getText().toString();
 	}
 }

@@ -22,8 +22,8 @@ public class TaskQuery {
 		String[] allParams = new String[params.length + 1];
 		for(int index = 0 ; index < params.length ; index++)
 			allParams[index] = params[index];
-		allParams[params.length + 1] = "0";
-		_whereParams = params;
+		allParams[params.length] = "0";
+		_whereParams = allParams;
 	}
 
 	String get_whereStatement() {

@@ -14,9 +14,7 @@ public class Options extends PreferenceActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		addPreferencesFromResource(R.layout.preferences);
-		defaultTimePref = findPreference("defaultNewTimePref");
-		defaultTimePref.setLayoutResource(R.layout.custom_option);		
+		addPreferencesFromResource(R.layout.preferences);	
 		currentDisplayPref = PreferenceService.getShowCompletedPreference(this);
 	}
 }
