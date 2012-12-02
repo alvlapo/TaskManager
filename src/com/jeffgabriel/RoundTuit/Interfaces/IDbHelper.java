@@ -1,10 +1,10 @@
-package com.jeffgabriel.TaskManager.Interfaces;
+package com.jeffgabriel.RoundTuit.Interfaces;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
-import com.jeffgabriel.TaskManager.Task;
-import com.jeffgabriel.TaskManager.TaskQuery;
+import com.jeffgabriel.RoundTuit.Task;
+import com.jeffgabriel.RoundTuit.TaskQuery;
 
 import android.database.Cursor;
 import android.database.SQLException;

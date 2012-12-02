@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.jeffgabriel.TaskManager"
+    package="com.jeffgabriel.RoundTuit"
     android:versionCode="1"
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="8"
-        android:targetSdkVersion="10" />
+        android:minSdkVersion="10"
+        android:targetSdkVersion="12" />
 
     <application
-        android:icon="@drawable/icon"
+        android:icon="@drawable/roundtuit"
         android:label="@string/app_name" >
         <provider
             android:name=".TaskProvider"
-            android:authorities="com.jeffgabriel.TaskManager.TaskProvider;com.jeffgabriel.TaskManager" />
+            android:authorities="com.jeffgabriel.RoundTuit.TaskProvider;com.jeffgabriel.RoundTuit" />
 
         <activity
-            android:name=".TaskManagerActivity"
+            android:name=".RoundTuitActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

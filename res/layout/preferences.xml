@@ -36,7 +36,7 @@
                         android:entryValues="@array/listSizes" />
     </PreferenceCategory>
     <PreferenceCategory android:title="@string/taskAddFormPreferenceCategory">
-        <com.jeffgabriel.TaskManager.DefaultTimeWidget 
+        <com.jeffgabriel.RoundTuit.DefaultTimeWidget 
             	android:title="@string/defaultTimeTitle"
             	android:key="defaultNewTimePref"
 			/>

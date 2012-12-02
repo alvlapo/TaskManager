@@ -1,4 +1,4 @@
-package com.jeffgabriel.TaskManager;
+package com.jeffgabriel.RoundTuit;
 
 import java.io.Serializable;
 
@@ -7,10 +7,10 @@ import android.net.Uri;
 
 public class TaskIntent {
 
-	static final String CREATE_TASK_ACTION = "com.jeffgabriel.TaskManager.CreateTask";
-	static final String DELETE_TASK_ACTION = "com.jeffgabriel.TaskManager.DeleteTask";
-	static final String UPDATE_TASK_ACTION = "com.jeffgabriel.TaskManager.UpdateTask";
-	static final String DISPLAY_TASK_ACTION = "com.jeffgabriel.TaskManager.ShowTask";
+	static final String CREATE_TASK_ACTION = "com.jeffgabriel.RoundTuit.CreateTask";
+	static final String DELETE_TASK_ACTION = "com.jeffgabriel.RoundTuit.DeleteTask";
+	static final String UPDATE_TASK_ACTION = "com.jeffgabriel.RoundTuit.UpdateTask";
+	static final String DISPLAY_TASK_ACTION = "com.jeffgabriel.RoundTuit.ShowTask";
 	public static final Uri CONTENT_URI = Uri.parse("content://" + TaskProvider.AUTHORITY + "/Tasks");
 	static final String TASK_DATA_KEY = "TaskData";
 

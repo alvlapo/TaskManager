@@ -1,4 +1,4 @@
-package com.jeffgabriel.TaskManager;
+package com.jeffgabriel.RoundTuit;
 
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -18,14 +18,14 @@ public class AlarmReceiver extends BroadcastReceiver {
 		Task taskDue = intendedTask.getTask();
 		if (taskDue == null || taskDue.get_isComplete())
 			return;
-		Notification notification = new Notification(R.drawable.icon,
+		Notification notification = new Notification(R.drawable.roundtuit,
 				"Task Alarm", System.currentTimeMillis());
 		notification.flags |= Notification.FLAG_AUTO_CANCEL;
 		if (PreferenceService.getAlertShouldSoundPreference(context)) {
 			notification.sound = PreferenceService
 					.getAlertSoundPreference(context);
 		}
-		Intent activityOpener = new Intent(context, TaskManagerActivity.class);
+		Intent activityOpener = new Intent(context, RoundTuitActivity.class);
 		activityOpener.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
 				| Intent.FLAG_ACTIVITY_NO_ANIMATION);
 		PendingIntent contentIntent = PendingIntent.getActivity(context, 0,

@@ -1,11 +1,10 @@
-package com.jeffgabriel.TaskManager;
+package com.jeffgabriel.RoundTuit;
 
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.preference.Preference;
 import android.text.format.Time;
 import android.util.AttributeSet;
-import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;

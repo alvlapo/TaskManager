@@ -1,11 +1,11 @@
-package com.jeffgabriel.TaskManager;
+package com.jeffgabriel.RoundTuit;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Date;
 
-import com.jeffgabriel.TaskManager.Interfaces.IValidate;
-import com.jeffgabriel.TaskManager.Validators.TaskValidator;
+import com.jeffgabriel.RoundTuit.Interfaces.IValidate;
+import com.jeffgabriel.RoundTuit.Validators.TaskValidator;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -14,9 +14,9 @@ import android.database.sqlite.*;
 import android.database.sqlite.SQLiteDatabase.CursorFactory;
 
 public class DatabaseHelper extends SQLiteOpenHelper implements
-		com.jeffgabriel.TaskManager.Interfaces.IDbHelper {
+		com.jeffgabriel.RoundTuit.Interfaces.IDbHelper {
 
-	private static String DB_PATH = "/data/data/com.jeffgabriel.TaskManager/databases/";
+	private static String DB_PATH = "/data/data/com.jeffgabriel.RoundTuit/databases/";
 	private static final String DatabaseName = "taskDb";
 	private static final int DatabaseVersion = 2;
 	private SQLiteDatabase _dataBase;

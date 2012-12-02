@@ -1,9 +1,9 @@
-package com.jeffgabriel.TaskManager.Validators;
+package com.jeffgabriel.RoundTuit.Validators;
 
 import java.util.Calendar;
 
-import com.jeffgabriel.TaskManager.R;
-import com.jeffgabriel.TaskManager.Task;
+import com.jeffgabriel.RoundTuit.R;
+import com.jeffgabriel.RoundTuit.Task;
 
 public class TaskDateValidator extends ValidatorBase<Task> {
 

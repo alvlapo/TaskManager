@@ -1,11 +1,11 @@
-package com.jeffgabriel.TaskManager.Validators;
+package com.jeffgabriel.RoundTuit.Validators;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
 
-import com.jeffgabriel.TaskManager.Task;
+import com.jeffgabriel.RoundTuit.Task;
 
 public class TaskValidator extends ValidatorBase<Task> {
 	List<ValidatorBase<Task>> _validators = new ArrayList<ValidatorBase<Task>>();

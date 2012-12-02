@@ -1,4 +1,4 @@
-package com.jeffgabriel.TaskManager;
+package com.jeffgabriel.RoundTuit;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -10,7 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.jeffgabriel.TaskManager.Interfaces.IDbHelper;
+import com.jeffgabriel.RoundTuit.Interfaces.IDbHelper;
 
 public class CreateTaskActivity extends Activity implements
 		View.OnClickListener {

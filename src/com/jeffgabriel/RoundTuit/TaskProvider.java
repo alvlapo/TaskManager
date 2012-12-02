@@ -1,4 +1,4 @@
-package com.jeffgabriel.TaskManager;
+package com.jeffgabriel.RoundTuit;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -11,7 +11,7 @@ import android.content.UriMatcher;
 import android.database.Cursor;
 import android.net.Uri;
 
-import com.jeffgabriel.TaskManager.Interfaces.ITaskProvider;
+import com.jeffgabriel.RoundTuit.Interfaces.ITaskProvider;
 
 public class TaskProvider extends ContentProvider implements ITaskProvider {
 
@@ -21,12 +21,12 @@ public class TaskProvider extends ContentProvider implements ITaskProvider {
 	public static final String CATEGORY_ID = "CategoryId";
 	public static final String CREATE_DATE = "CreateDate";
 	public static final String IS_COMPLETE = "IsComplete";
-	public static final String AUTHORITY = "com.jeffgabriel.TaskManager";
+	public static final String AUTHORITY = "com.jeffgabriel.RoundTuit";
 	public static final Uri ALL_TASKS = Uri.parse("content://" + AUTHORITY + "/task");
 	private static final int TASKS = 1;
 	private static final int TASK_ID = 2;
 
-	com.jeffgabriel.TaskManager.Interfaces.IDbHelper _dbHelper;
+	com.jeffgabriel.RoundTuit.Interfaces.IDbHelper _dbHelper;
 	Context _context;
 	
 	public TaskProvider(){
@@ -34,7 +34,7 @@ public class TaskProvider extends ContentProvider implements ITaskProvider {
 	}
 
 	public TaskProvider(
-			com.jeffgabriel.TaskManager.Interfaces.IDbHelper helper,
+			com.jeffgabriel.RoundTuit.Interfaces.IDbHelper helper,
 			Context context) {
 		setFromLocalContext(context);
 		_dbHelper = helper;

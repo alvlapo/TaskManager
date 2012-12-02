@@ -1,8 +1,7 @@
-package com.jeffgabriel.TaskManager;
+package com.jeffgabriel.RoundTuit;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Dictionary;
 import java.util.concurrent.ConcurrentHashMap;
 
 import android.app.AlertDialog;
@@ -20,7 +19,7 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ResourceCursorAdapter;
 import android.widget.TextView;
 
-import com.jeffgabriel.TaskManager.Interfaces.ITaskProvider;
+import com.jeffgabriel.RoundTuit.Interfaces.ITaskProvider;
 
 public class TaskCursorAdapter extends ResourceCursorAdapter {
 	private CheckBox dontShowAgain;
@@ -153,10 +152,9 @@ public class TaskCursorAdapter extends ResourceCursorAdapter {
 		public void onClick(DialogInterface dialog, int which) {
 			PreferenceService.setHideDeleteWarningPreference(_context,
 					dontShowAgain.isChecked());
-
 			switch (which) {
 			case DialogInterface.BUTTON_POSITIVE:
-				deleteTask(_context, null);
+				deleteTask(_context, new Task(1,null,null,true));//TODO: need to be able to figure out which task this is for.
 				break;
 			case DialogInterface.BUTTON_NEGATIVE:
 				break;

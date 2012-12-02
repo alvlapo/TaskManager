@@ -1,8 +1,8 @@
-package com.jeffgabriel.TaskManager.Validators;
+package com.jeffgabriel.RoundTuit.Validators;
 
 import android.content.Context;
 
-import com.jeffgabriel.TaskManager.Interfaces.IValidate;
+import com.jeffgabriel.RoundTuit.Interfaces.IValidate;
 
 public abstract class ValidatorBase<T> implements IValidate<T> {
 	protected static final String EmptyMessage = "";
