@@ -22,26 +22,26 @@ public class TaskProvider extends ContentProvider implements ITaskProvider {
 	public static final String CREATE_DATE = "CreateDate";
 	public static final String IS_COMPLETE = "IsComplete";
 	public static final String AUTHORITY = "com.jeffgabriel.RoundTuit";
-	public static final Uri ALL_TASKS = Uri.parse("content://" + AUTHORITY + "/task");
+	public static final Uri ALL_TASKS = Uri.parse("content://" + AUTHORITY
+			+ "/task");
 	private static final int TASKS = 1;
 	private static final int TASK_ID = 2;
 
 	com.jeffgabriel.RoundTuit.Interfaces.IDbHelper _dbHelper;
 	Context _context;
-	
-	public TaskProvider(){
+
+	public TaskProvider() {
 		super();
 	}
 
-	public TaskProvider(
-			com.jeffgabriel.RoundTuit.Interfaces.IDbHelper helper,
+	public TaskProvider(com.jeffgabriel.RoundTuit.Interfaces.IDbHelper helper,
 			Context context) {
 		setFromLocalContext(context);
 		_dbHelper = helper;
 		initProvider();
 	}
-	
-	private void initProvider(){
+
+	private void initProvider() {
 		if (_dbHelper == null)
 			_dbHelper = new DatabaseHelper(_context);
 		try {
@@ -50,15 +50,15 @@ public class TaskProvider extends ContentProvider implements ITaskProvider {
 			e.printStackTrace();
 		}
 	}
-	
-	private TaskQuery getTaskQueryWithPreference(){
+
+	private TaskQuery getTaskQueryWithPreference() {
 		return new TaskQuery(
 				PreferenceService.getShowCompletedPreference(_context));
 	}
-	
-	private void setFromLocalContext(Context localContext){
+
+	private void setFromLocalContext(Context localContext) {
 		_context = getContext();
-		if(_context == null && localContext != null)
+		if (_context == null && localContext != null)
 			_context = localContext;
 	}
 
@@ -67,13 +67,15 @@ public class TaskProvider extends ContentProvider implements ITaskProvider {
 	}
 
 	public List<Task> getAll() {
-		return getSome(PreferenceService.getDefaultListPageSize(getContext()), 0);
+		return getSome(PreferenceService.getDefaultListPageSize(getContext()),
+				0);
 	}
 
 	String categoryWhere = " CategoryId = ? ";
 
 	public List<Task> getSome(int pageSize, int pageIndex) {
-		List<Task> fullResults = _dbHelper.getTasks(getTaskQueryWithPreference());
+		List<Task> fullResults = _dbHelper
+				.getTasks(getTaskQueryWithPreference());
 		if (pageSize > 0 && fullResults.isEmpty() == false) {
 			int resultEndIndex = pageSize * (pageIndex + 1);
 			resultEndIndex = resultEndIndex > fullResults.size() ? fullResults
@@ -91,16 +93,18 @@ public class TaskProvider extends ContentProvider implements ITaskProvider {
 
 	public void update(Task task) {
 		if (task.get_dueDate() == null)
-			throw new IllegalStateException(getContext().getResources().getString(
-					R.string.noDueDateError));
+			throw new IllegalStateException(getContext().getResources()
+					.getString(R.string.noDueDateError));
 		_dbHelper.update(task);
 	}
 
 	String whereClause = "_id = ?";
 
 	public Task get(int taskId) {
-		TaskQuery byId = new TaskQuery(false);
-		byId.set_WhereParameters(new String[] { Integer.toString(taskId) });
+		TaskQuery byId = new TaskQuery(true);
+		ArrayList<String> parms = new ArrayList<String>();
+		parms.add(Integer.toString(taskId));
+		byId.set_whereParameters(parms);
 		byId.set_whereStatement(whereClause);
 		ArrayList<Task> tasks = _dbHelper.getTasks(byId);
 		if (tasks.isEmpty() == false)

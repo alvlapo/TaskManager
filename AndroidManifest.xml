@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.jeffgabriel.RoundTuit"
-    android:versionCode="1"
-    android:versionName="1.0" >
+    android:versionCode="2"
+    android:versionName="1.1.329" >
 
     <uses-sdk
         android:minSdkVersion="10"
-        android:targetSdkVersion="12" />
+        android:targetSdkVersion="14" />
 
     <application
         android:icon="@drawable/roundtuit"
@@ -32,7 +32,7 @@
             android:name=".CreateTaskActivity"
             android:label="@string/addTaskLabel" >
             <intent-filter>
-                <category android:name="android.intent.category.EDIT" />
+                <category android:name="android.intent.category.DEFAULT" />
                 <action android:name="android.intent.action.INSERT" />
                 <action android:name="android.intent.action.EDIT" />
                 <data android:mimeType="vnd.android.cursor.item/Task" />

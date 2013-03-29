@@ -2,6 +2,7 @@ package com.jeffgabriel.RoundTuit;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 import java.util.concurrent.ConcurrentHashMap;
 
 import android.app.AlertDialog;
@@ -91,9 +92,30 @@ public class TaskCursorAdapter extends ResourceCursorAdapter {
 					} else {
 						AlertDialog.Builder builder = new AlertDialog.Builder(v
 								.getContext());
-						builder.setMessage(R.string.deleteWarning)
-								.setPositiveButton("Yes", dialogClickListener)
-								.setNegativeButton("No", dialogClickListener);
+						builder.setMessage(R.string.deleteWarning);
+						builder.setPositiveButton("Yes",
+								new DialogInterface.OnClickListener() {
+									@Override
+									public void onClick(DialogInterface dialog,
+											int which) {
+										PreferenceService
+												.setHideDeleteWarningPreference(
+														_context, dontShowAgain
+																.isChecked());
+										deleteTask(_context, currentTask);
+									}
+								});
+						builder.setNegativeButton("No",
+								new DialogInterface.OnClickListener() {
+									@Override
+									public void onClick(DialogInterface dialog,
+											int which) {
+										PreferenceService
+												.setHideDeleteWarningPreference(
+														_context, dontShowAgain
+																.isChecked());
+									}
+								});
 						LayoutInflater adbInflater = LayoutInflater.from(v
 								.getContext());
 						View deleteLayout = adbInflater.inflate(
@@ -143,28 +165,13 @@ public class TaskCursorAdapter extends ResourceCursorAdapter {
 	private final String simpleDateFormat = "MM/dd/yyyy";
 
 	private String getFormattedDate(Date date) {
-		SimpleDateFormat format = new SimpleDateFormat(simpleDateFormat);
+		SimpleDateFormat format = new SimpleDateFormat(simpleDateFormat,
+				Locale.US);
 		return format.format(date);
 	}
 
-	DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
-		@Override
-		public void onClick(DialogInterface dialog, int which) {
-			PreferenceService.setHideDeleteWarningPreference(_context,
-					dontShowAgain.isChecked());
-			switch (which) {
-			case DialogInterface.BUTTON_POSITIVE:
-				deleteTask(_context, new Task(1,null,null,true));//TODO: need to be able to figure out which task this is for.
-				break;
-			case DialogInterface.BUTTON_NEGATIVE:
-				break;
-			}
-
-		}
-	};
-
 	private void deleteTask(Context context, Task task) {
-		
+
 		getProvider(context).delete(task);
 		_cursor.requery();
 		notifyDataSetChanged();

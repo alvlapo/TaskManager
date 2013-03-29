@@ -48,8 +48,10 @@ public class NewTaskWidget extends LinearLayout {
 		Calendar cal = Calendar.getInstance(
 				TimeZone.getTimeZone("America/New_York"), Locale.US);
 		cal.add(Calendar.DAY_OF_MONTH, 1);
-		newTaskDate.updateDate(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH),
-				cal.get(Calendar.DAY_OF_MONTH));
+		int year = cal.get(Calendar.YEAR);
+		int month = cal.get(Calendar.MONTH);
+		int day = cal.get(Calendar.DAY_OF_MONTH);
+		newTaskDate.updateDate(year, month, day);
 		newTime.setCurrentHour(defaultTime.hour);
 		newTime.setCurrentMinute(defaultTime.minute);
 	}
@@ -78,5 +80,25 @@ public class NewTaskWidget extends LinearLayout {
 
 	String getTaskName() {
 		return newTaskName.getText().toString();
+	}
+
+	void setTaskName(String name) {
+		newTaskName.setText(name);
+	}
+
+	void setDateAndTime(Date date) {
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(date);
+		int day = cal.get(Calendar.DAY_OF_MONTH);
+		int month = cal.get(Calendar.MONTH);
+		int year = cal.get(Calendar.YEAR);
+		newTaskDate.updateDate(year, month, day);
+		newTime.setCurrentHour(date.getHours());
+		newTime.setCurrentMinute(date.getMinutes());
+	}
+
+	void updateFromExisting(Task task) {
+		setTaskName(task.get_name());
+		setDateAndTime(task.get_dueDate());
 	}
 }

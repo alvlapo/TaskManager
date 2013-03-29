@@ -1,33 +1,37 @@
 package com.jeffgabriel.RoundTuit;
 
+import java.util.ArrayList;
 
 public class TaskQuery {
 	private String[] _whereParams;
 	boolean showComplete = false;
 	static final String StatusClause = " IsComplete = ? ";
-	
-	public TaskQuery(boolean showCompletedItems){
+
+	public TaskQuery(boolean showCompletedItems) {
 		showComplete = showCompletedItems;
 		if (showComplete == false) {
 			_whereParams = new String[] { "0" };
 			_whereStatement = StatusClause;
 		}
 	}
-	
-	public String[] get_WhereParameters() {
+
+	public String[] get_whereParameters() {
 		return _whereParams;
 	}
 
-	public void set_WhereParameters(String[] params) {
-		String[] allParams = new String[params.length + 1];
-		for(int index = 0 ; index < params.length ; index++)
-			allParams[index] = params[index];
-		allParams[params.length] = "0";
-		_whereParams = allParams;
+	public void set_whereParameters(ArrayList<String> params) {
+		if (showComplete == false)
+			params.add("0");
+		_whereParams = params.toArray(new String[params.size()]);
 	}
 
 	String get_whereStatement() {
-		return _whereStatement != StatusClause && _whereStatement.length() > 0 ? _whereStatement + " AND " + StatusClause : _whereStatement;
+		if (_whereStatement == StatusClause)
+			return StatusClause;
+		String where = showComplete ? _whereStatement : (_whereStatement
+				.length() > 0) ? _whereStatement + " AND " + StatusClause
+				: StatusClause;
+		return where;
 	}
 
 	void set_whereStatement(String whereStatement) {

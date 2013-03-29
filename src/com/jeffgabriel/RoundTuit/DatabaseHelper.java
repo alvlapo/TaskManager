@@ -177,7 +177,7 @@ public class DatabaseHelper extends SQLiteOpenHelper implements
 
 		this.openDataBase();
 		Cursor results = _dataBase.query(table, columns,
-				query.get_whereStatement(), query.get_WhereParameters(), null,
+				query.get_whereStatement(), query.get_whereParameters(), null,
 				null, orderBy);
 		return results;
 	}

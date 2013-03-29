@@ -68,7 +68,7 @@ public class PreferenceService {
 
 	public static Time getDefaultTaskTime(Context context) {
 		long timeValue = PreferenceManager.getDefaultSharedPreferences(context)
-				.getLong("defaultNewTimePref", 720000);
+				.getLong("defaultNewTimePref", 28800000);
 		Time time = new Time();
 		time.set(timeValue);
 		return time;

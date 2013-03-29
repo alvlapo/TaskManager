@@ -44,6 +44,7 @@ public class RoundTuitActivity extends ListActivity {
 				TaskProvider provider = new TaskProvider(null,view.getContext());
 				Task currentTask = provider.get((int)id);
 				Intent editIntent = new Intent(Intent.ACTION_EDIT,currentTask.get_Uri());
+				editIntent.setType("vnd.android.cursor.item/Task");
 				editIntent.putExtra("task", currentTask);
 				startActivity(editIntent);
 			}
